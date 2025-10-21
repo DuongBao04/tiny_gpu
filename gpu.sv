@@ -67,7 +67,7 @@ module gpu #(
     wire [NUM_CORES-1:0] core_reset;
     wire [NUM_CORES-1:0] core_done;
     wire [7:0] core_block_id [NUM_CORES-1:0];
-    wire [$clog2(THREADS_PER_BLOCK)-1:0] core_thread_count [NUM_CORES-1:0];
+    wire [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_CORES-1:0];
     
     //Lsu and Data memory
     localparam NUM_LSUS = NUM_CORES * THREADS_PER_BLOCK;
@@ -157,7 +157,7 @@ module gpu #(
             reg [THREADS_PER_BLOCK-1:0] core_lsu_write_ready;
             
             genvar j;
-            for (j = 0; j < THREADS_PER_BLOCK; j = j - 1) begin
+            for (j = 0; j < THREADS_PER_BLOCK; j = j + 1) begin
                 localparam lsu_index = i * THREADS_PER_BLOCK + j;
                 always @(posedge clk) begin 
                     lsu_read_request[lsu_index] <= core_lsu_read_request[j];

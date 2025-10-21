@@ -32,7 +32,7 @@ module core (
     
     // Instruction Memory
     output reg instruction_mem_read_request,
-    output reg [7:0] instruction_mem_read_addr,
+    output reg [7:0] instruction_mem_read_address,
     input wire instruction_mem_read_ready,
     input wire [15:0] instruction_mem_read_data,
     
